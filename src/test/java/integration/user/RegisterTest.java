@@ -1,10 +1,9 @@
 package integration.user;
 
 import integration.BaseTest;
-import integration.core.constant.DriverName;
 import integration.core.provider.WebDriverProvider;
 import integration.core.util.ApiUtils;
-import integration.page_object.RegisterPage;
+import integration.page.RegisterPage;
 import integration.user.model.User;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -14,9 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
-import java.util.Arrays;
-import java.util.Collection;
 
 import static integration.core.constant.AppEndpoints.LOGIN_ENDPOINT;
 import static integration.core.properties.TestProperties.getAppUrl;
@@ -29,24 +25,13 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class RegisterTest extends BaseTest {
 
-    private final RegisterPage registerPage;
+    private RegisterPage registerPage;
     private User testUser;
-
-    public RegisterTest(DriverName driverName) {
-        driver = WebDriverProvider.createWebDriver(driverName);
-        this.registerPage = new RegisterPage(driver);
-    }
-
-    @Parameterized.Parameters(name = "{0}")
-    public static Collection<Object[]> browsers() {
-        return Arrays.asList(new Object[][]{
-                {DriverName.CHROME},
-                {DriverName.YANDEX},
-        });
-    }
 
     @Before
     public void setUp() {
+        driver = WebDriverProvider.createWebDriver();
+        this.registerPage = new RegisterPage(driver);
         registerPage.openRegisterPage();
         testUser = initTestUser();
     }

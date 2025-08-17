@@ -7,11 +7,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import static integration.core.properties.TestProperties.*;
-import static integration.core.properties.TestProperties.getYandexBrowserBinaryPath;
 
 public class WebDriverProvider {
 
-    public static WebDriver createWebDriver(DriverName driverName) {
+    public static WebDriver createWebDriver() {
+        DriverName driverName = getDriverName();
         switch (driverName) {
             case CHROME:
                 String chromeBrowserVersion = getChromeBrowserVersion();

@@ -1,5 +1,6 @@
-package integration.page_object;
+package integration.page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,42 +22,50 @@ public class RegisterPage extends BasePage {
         super(driver);
     }
 
+    @Step("Открыть страницу регистрации")
     public void openRegisterPage() {
         driver.get(getAppUrl() + REGISTER_ENDPOINT);
     }
 
+    @Step("Заполнить поле 'Имя'")
     public void fillNameInput(String text) {
         WebElement nameInput = findElementWaitingVisibility(By.xpath(NAME_INPUT_XPATH));
         nameInput.sendKeys(text);
     }
 
+    @Step("Заполнить поле 'Email'")
     public void fillEmailInput(String text) {
         WebElement nameInput = findElementWaitingVisibility(By.xpath(EMAIL_INPUT_XPATH));
         nameInput.sendKeys(text);
     }
 
+    @Step("Заполнить поле 'Пароль'")
     public void fillPasswordInput(String text) {
         WebElement nameInput = findElementWaitingVisibility(By.xpath(PASSWORD_INPUT_XPATH));
         nameInput.sendKeys(text);
     }
 
+    @Step("Клик по кнопке 'Зарегистрироваться'")
     public void clickRegisterButton() {
         WebElement registerButton = findElementWaitingVisibility(By.xpath(REGISTER_BUTTON_XPATH));
         waitForElementToBeClickable(registerButton);
         registerButton.click();
     }
 
+    @Step("Получить текст ошибки валидации поля 'Пароль'")
     public String getIncorrectPasswordValidationText() {
         WebElement validationText = findElementWaitingVisibility(By.xpath(INCORRECT_PASSWORD_VALIDATION_TEXT_XPATH));
         return validationText.getText();
     }
 
+    @Step("Клик по ссылочному тексту 'Войти'")
     public void clickOnLoginLink() {
         WebElement loginLink = findElementWaitingVisibility(By.xpath(LOGIN_LINK_XPATH));
         waitForElementToBeClickable(loginLink);
         loginLink.click();
     }
 
+    @Step("Ожидание редиректа на страницу авторизации")
     public void waitForRedirectToLoginPage() {
         waitForRedirectTo(getAppUrl() + LOGIN_ENDPOINT);
     }

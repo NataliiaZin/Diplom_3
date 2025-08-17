@@ -1,5 +1,6 @@
-package integration.page_object;
+package integration.page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,22 +17,26 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("Заполнить поле 'Email'")
     public void fillEmailInput(String text) {
         WebElement nameInput = findElementWaitingVisibility(By.xpath(EMAIL_INPUT_XPATH));
         nameInput.sendKeys(text);
     }
 
+    @Step("Заполнить поле 'Пароль'")
     public void fillPasswordInput(String text) {
         WebElement nameInput = findElementWaitingVisibility(By.xpath(PASSWORD_INPUT_XPATH));
         nameInput.sendKeys(text);
     }
 
+    @Step("Клик по кнопке 'Войти'")
     public void clickLoginButton() {
         WebElement loginButton = findElementWaitingVisibility(By.xpath(LOGIN_BUTTON_XPATH));
         waitForElementToBeClickable(loginButton);
         loginButton.click();
     }
 
+    @Step("Ожидание редиректа на страницу лендинг")
     public void waitForRedirectToLanding() {
         waitForRedirectTo(getAppUrl());
     }

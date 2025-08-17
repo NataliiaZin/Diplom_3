@@ -2,6 +2,7 @@ package integration.core.util;
 
 import integration.core.properties.TestProperties;
 import integration.user.model.User;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -13,6 +14,7 @@ import static io.restassured.RestAssured.given;
 
 public class ApiUtils {
 
+    @Step("Удалить созданого пользователя")
     public static void deleteUser(User user) {
         RestAssured.baseURI = TestProperties.getAppUrl() + API_ENDPOINT;
         Response response = given()
@@ -34,6 +36,7 @@ public class ApiUtils {
         }
     }
 
+    @Step("Регистрация пользователя")
     public static void registerUser(User user) {
         given()
                 .contentType(String.valueOf(ContentType.JSON))

@@ -1,5 +1,6 @@
-package integration.page_object;
+package integration.page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,16 +17,19 @@ public class PasswordRecoveryPage extends BasePage {
         super(driver);
     }
 
+    @Step("Открыть страницу востановление пароля")
     public void openPasswordRecoveryPage() {
         driver.get(getAppUrl() + PASSWORD_RECOVERY_ENDPOINT);
     }
 
+    @Step("Клик по ссылочному тексту 'Войти'")
     public void clickOnLoginLink() {
         WebElement loginLink = findElementWaitingVisibility(By.xpath(LOGIN_LINK_XPATH));
         waitForElementToBeClickable(loginLink);
         loginLink.click();
     }
 
+    @Step("Ожидание редиректа на страницу авторизации")
     public void waitForRedirectToLoginPage() {
         waitForRedirectTo(getAppUrl() + LOGIN_ENDPOINT);
     }

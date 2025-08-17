@@ -1,5 +1,7 @@
 package integration.core.properties;
 
+import integration.core.constant.DriverName;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -12,6 +14,7 @@ public class TestProperties {
     private static final String YANDEX_BROWSER_VERSION_PROPERTY_NAME = "yandex.browser.version";
     private static final String YANDEX_BROWSER_BINARY_VERSION_PROPERTY_NAME = "yandex.browser.binary.path";
     private static final String YANDEX_DRIVER_PATH_PROPERTY_NAME = "yandex.driver.path";
+    private static final String TEST_BROWSER_NAME = "driver.name";
     private static final Properties properties;
 
     static {
@@ -29,6 +32,10 @@ public class TestProperties {
 
     public static String getAppUrl() {
         return getProperty(APP_URL_PROPERTY_NAME);
+    }
+
+    public static DriverName getDriverName() {
+        return DriverName.valueOf(getProperty(TEST_BROWSER_NAME));
     }
 
     public static String getChromeBrowserVersion() {
