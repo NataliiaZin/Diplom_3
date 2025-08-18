@@ -9,10 +9,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 import static integration.core.constant.AppEndpoints.LOGIN_ENDPOINT;
 import static integration.core.properties.TestProperties.getAppUrl;
@@ -22,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 
 @Epic("Stellar Burgers Integration")
 @Feature("Регистрация пользователя")
-@RunWith(Parameterized.class)
 public class RegisterTest extends BaseTest {
 
     private RegisterPage registerPage;
@@ -34,6 +32,11 @@ public class RegisterTest extends BaseTest {
         this.registerPage = new RegisterPage(driver);
         registerPage.openRegisterPage();
         testUser = initTestUser();
+    }
+
+    @After
+    public void tearDown() {
+        ApiUtils.deleteUser(testUser);
     }
 
     @Test
@@ -48,7 +51,6 @@ public class RegisterTest extends BaseTest {
         String currentUrl = driver.getCurrentUrl();
         String expectedUrl = getAppUrl() + LOGIN_ENDPOINT;
         assertEquals(expectedUrl, currentUrl);
-        ApiUtils.deleteUser(testUser);
     }
 
     @Test
